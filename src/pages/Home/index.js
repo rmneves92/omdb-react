@@ -8,6 +8,7 @@ import {
   fetchFailure,
   fetchSuccess,
 } from "../../redux/moviesSlice";
+import * as S from "./styles";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -47,27 +48,31 @@ const Home = (props) => {
   };
 
   return (
-    <>
-      <h1>Home</h1>
+    <S.Container>
+      <S.Hero>
+        <h1>Home</h1>
 
-      <input
-        type="search"
-        placeholder="Buscar filme..."
-        onChange={(e) => handleChange(e.target.value)}
-      />
-      <button onClick={() => searchMovie()}>Buscar</button>
-      <button onClick={() => console.log(moviesSlice)}>Get details</button>
+        <S.Input
+          type="search"
+          placeholder="Buscar filme..."
+          onChange={(e) => handleChange(e.target.value)}
+        />
 
-      <div>
-        {movie &&
-          movie.Search.map((m) => (
-            <div onClick={() => openDetails(m.imdbID)}>
-              <h3>{m.Title}</h3>
-              <span>{m.Year}</span>
-            </div>
-          ))}
-      </div>
-    </>
+        <button onClick={() => searchMovie()}>Buscar</button>
+        <button onClick={() => console.log(moviesSlice)}>Get details</button>
+
+        <div>
+          {movie &&
+            movie.Search.map((m) => (
+              <div onClick={() => openDetails(m.imdbID)}>
+                <img src={m.Poster}></img>
+                <h3>{m.Title}</h3>
+                <span>{m.Year}</span>
+              </div>
+            ))}
+        </div>
+      </S.Hero>
+    </S.Container>
   );
 };
 
