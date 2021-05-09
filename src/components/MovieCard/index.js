@@ -3,7 +3,7 @@ import * as S from "./styles";
 
 const MovieCard = ({ Title, imdbID, Poster, open }) => {
   return (
-    <S.Card onClick={() => open(imdbID)}>
+    <S.Card data-testid="movie-item" onClick={() => open(imdbID)}>
       <S.PosterContainer>
         <S.Poster src={Poster} alt={Title}></S.Poster>
       </S.PosterContainer>

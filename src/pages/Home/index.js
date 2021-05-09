@@ -32,17 +32,15 @@ const Home = (props) => {
     inputRef.current.focus();
   }, []);
 
-  // const [value, setValue] = useState("captain");
-
   const loadMovies = (query) => {
     try {
       api
         .get(`/?s=${query}&type=movie&page=${page}`)
         .then((res) => {
-          console.log(res);
           if (res.data.Search?.length > 0) {
             dispatch(setCatalog(res.data.Search));
-            // history.push("/catalog");
+          } else {
+            dispatch(setCatalog([]));
           }
         })
         .catch((err) => {
@@ -54,7 +52,6 @@ const Home = (props) => {
   };
 
   const handleChange = (value) => {
-    // setValue(value);
     dispatch(setTitle(value));
   };
 
@@ -63,14 +60,12 @@ const Home = (props) => {
   };
 
   const handleKeyDown = (e) => {
-    console.log("down");
     if (e.key === "Enter") {
       loadMovies(moviesSlice.title);
     }
   };
 
   const handleClick2 = (id) => {
-    console.log("====>> id do filme: ", id);
     dispatch(setMovieId(id));
     history.push("/details");
   };
@@ -83,46 +78,49 @@ const Home = (props) => {
       variants={animationOne}
       transition={transition}
     >
-      <S.Label>Digite o título do filme</S.Label>
-      <S.InputWrapper>
-        <S.Input
-          ref={inputRef}
-          value={moviesSlice.title}
-          type="search"
-          placeholder="Buscar filme..."
-          onChange={(e) => handleChange(e.target.value)}
-          onKeyDown={(e) => handleKeyDown(e)}
-        />
+      <S.Container>
+        <S.Label>Digite o título do filme</S.Label>
+        <S.InputWrapper>
+          <S.Input
+            data-testid={"input"}
+            ref={inputRef}
+            value={moviesSlice.title}
+            type="search"
+            placeholder="Buscar filme..."
+            onChange={(e) => handleChange(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
+          />
 
-        <Button handleClick={() => searchMovie()} disabled={!moviesSlice.title}>
-          Buscar
-        </Button>
-      </S.InputWrapper>
+          <Button handleClick={() => searchMovie()} disabled={false}>
+            Buscar
+          </Button>
+        </S.InputWrapper>
 
-      <motion.section
-        initial="out"
-        animate="in"
-        exit="out"
-        variants={animationOne}
-        transition={transition}
-      >
-        {moviesSlice.catalog.length >= 10 && (
-          <Pagination changePage={setPage} page={page} />
-        )}
         <motion.section
           initial="out"
           animate="in"
           exit="out"
-          variants={animationThree}
+          variants={animationOne}
           transition={transition}
         >
-          <S.Grid>
-            {moviesSlice.catalog.map((m, i) => (
-              <MovieCard key={i} {...m} open={handleClick2} />
-            ))}
-          </S.Grid>
+          {moviesSlice.catalog.length >= 10 && (
+            <Pagination changePage={setPage} page={page} />
+          )}
+          <motion.section
+            initial="out"
+            animate="in"
+            exit="out"
+            variants={animationThree}
+            transition={transition}
+          >
+            <S.Grid>
+              {moviesSlice.catalog.map((m, i) => (
+                <MovieCard key={i} {...m} open={handleClick2} />
+              ))}
+            </S.Grid>
+          </motion.section>
         </motion.section>
-      </motion.section>
+      </S.Container>
     </motion.section>
   );
 };

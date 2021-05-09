@@ -17,17 +17,16 @@ const Details = (props) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    if (moviesSlice.data) {
-      loadDetails(moviesSlice.data);
+    if (moviesSlice.movieId) {
+      loadDetails(moviesSlice.movieId);
     }
-  }, [moviesSlice.data]);
+  }, [moviesSlice.movieId]);
 
   const loadDetails = (id) => {
     try {
       api
         .get(`/?i=${id}&plot=full&type=movie`)
         .then((res) => {
-          console.log("________details: ", res.data);
           setMovie(res.data);
         })
         .catch((err) => {
@@ -38,7 +37,6 @@ const Details = (props) => {
     }
   };
 
-  console.log({ movie });
   return (
     <motion.section
       initial="out"

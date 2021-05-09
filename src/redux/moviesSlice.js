@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { catalog: [], title: "" };
+const initialState = { catalog: [], title: "", movieId: null };
 
 const moviesSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
     setMovieId(state, action) {
-      state.data = action.payload;
+      state.movieId = action.payload;
     },
     setCatalog(state, action) {
       state.catalog = action.payload;

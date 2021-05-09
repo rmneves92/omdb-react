@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  display: flex;
-  align-items: center;
-  height: 90vh;
-  width: 100%;
+  overflow: scroll;
+  max-height: calc(100vh - 100px);
 `;
 
 export const Hero = styled.div`
@@ -57,8 +55,6 @@ export const Grid = styled.div`
   gap: 34px;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(100px, auto);
-  overflow-y: scroll;
-  max-height: 80vh;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
