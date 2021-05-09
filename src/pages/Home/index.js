@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { setMovieId, setCatalog } from "../../redux/moviesSlice";
 import * as S from "./styles";
 import { motion } from "framer-motion";
+import Button from "../../components/Button";
 import {
   animationOne,
   animationTwo,
@@ -18,7 +19,7 @@ const Home = (props) => {
   const history = useHistory();
 
   const [movie, setMovie] = useState(null);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("batman");
 
   const loadMovies = (query) => {
     try {
@@ -58,13 +59,14 @@ const Home = (props) => {
     >
       <S.InputWrapper>
         <S.Input
+          value={value}
           type="search"
           placeholder="Buscar filme..."
           onChange={(e) => handleChange(e.target.value)}
         />
       </S.InputWrapper>
 
-      <S.Button onClick={() => searchMovie()}>Buscar</S.Button>
+      <Button handleClick={() => searchMovie()}>Buscar</Button>
     </motion.section>
   );
 };

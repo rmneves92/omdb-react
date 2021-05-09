@@ -2,14 +2,8 @@ import Home from "./pages/Home";
 import Details from "./pages/Details";
 import Catalog from "./pages/Catalog";
 import Header from "./components/Header";
-import Background from "./assets/pexels-pavel-danilyuk-7234213.jpg";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  useLocation,
-} from "react-router-dom";
+
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import GlobalStyle from "../src/styles/global";
 import { AnimatePresence } from "framer-motion";
 import styled from "styled-components";
@@ -21,20 +15,32 @@ const Content = styled.main`
   z-index: 9999;
   margin-left: 20px;
   margin-right: 20px;
-
-  border: 3px dashed yellow;
   display: flex;
   align-items: center;
   height: 100%;
 `;
 
 const Hero = styled.div`
-  border: 2px solid purple;
+  background: #3a6186; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #89253e,
+    #3a6186
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #89253e,
+    #3a6186
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+
+  /* border: 2px solid purple; */
   padding-top: 0rem;
   padding-bottom: 0rem;
 
   position: relative;
   width: 100%;
+  height: 100%;
 
   margin-right: auto;
   margin-left: auto;
@@ -51,21 +57,22 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <BackgroundImage>
+        <AnimatePresence exitBeforeEnter>
+          <Header />
 
-      <AnimatePresence exitBeforeEnter>
-        <Header />
-        <BackgroundImage />
-        <Content>
-          <Hero>
-            <Switch location={location} key={location.pathname}>
-              <Route path="/" exact component={Home} />
-              <Route path="/catalog" exact component={Catalog} />
-              <Route path="/details" exact component={Details} />
-              <Route render={() => <Redirect to="/" />} />
-            </Switch>
-          </Hero>
-        </Content>
-      </AnimatePresence>
+          <Content>
+            <Hero>
+              <Switch location={location} key={location.pathname}>
+                <Route path="/" exact component={Home} />
+                <Route path="/catalog" exact component={Catalog} />
+                <Route path="/details" exact component={Details} />
+                <Route render={() => <Redirect to="/" />} />
+              </Switch>
+            </Hero>
+          </Content>
+        </AnimatePresence>
+      </BackgroundImage>
     </>
   );
 }

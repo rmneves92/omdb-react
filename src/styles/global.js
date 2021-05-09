@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import Background from "../assets/images/background.jpg";
 
 export default createGlobalStyle`
  html,
@@ -146,17 +147,17 @@ export default createGlobalStyle`
       }
 
       main {
-        border: 4px dashed blue
       }
 
       html, main, body, #root { 
           height: 100%
       }
       body {
-        background: #3a6186;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
+       
+        background: url(${Background}) no-repeat left center fixed;
       }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }     
 `;

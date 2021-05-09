@@ -43,28 +43,9 @@ const Details = (props) => {
       initial="out"
       animate="in"
       exit="out"
-      variants={animationOne}
+      variants={animationTwo}
       transition={transition}
     >
-      {/* <S.DetailsContainer>
-        <S.MoviePoster src={movie.Poster} alt={movie.Title}></S.MoviePoster>
-        <S.MovieInfo>
-          <h2> {movie.Title} </h2>
-          <span>Genero: {movie.Genre}</span>
-
-          <p>Ano: {movie.Year}</p>
-          <span>
-            Data: {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}
-          </span>
-          <span>
-            Nota: {movie.imdbRating}/10 ( {movie.imdbVotes?.replace(/,/g, ".")}{" "}
-            votos)
-          </span>
-
-          <p>{movie.Plot}</p>
-        </S.MovieInfo>
-      </S.DetailsContainer> */}
-
       <S.Container>
         <S.PosterContainer>
           {movie.Poster && (
@@ -92,9 +73,22 @@ const Details = (props) => {
 
           <S.MovieOverview>{movie.Plot}</S.MovieOverview>
 
-          <S.ReleaseDate>
-            {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}
-          </S.ReleaseDate>
+          <S.BottomInfo>
+            <S.SecondaryInfo>
+              <S.SecondaryInfoTitle>Data</S.SecondaryInfoTitle>
+              {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}
+            </S.SecondaryInfo>
+
+            <S.SecondaryInfo>
+              <S.SecondaryInfoTitle>Diretor</S.SecondaryInfoTitle>
+              {movie.Director}
+            </S.SecondaryInfo>
+
+            <S.SecondaryInfo>
+              <S.SecondaryInfoTitle>Diretor</S.SecondaryInfoTitle>
+              {movie.Runtime}
+            </S.SecondaryInfo>
+          </S.BottomInfo>
         </S.MovieDetails>
       </S.Container>
     </motion.section>

@@ -1,24 +1,11 @@
 import styled from "styled-components";
 
-export const DetailsContainer = styled.div`
-  display: flex;
-`;
-
-export const MoviePoster = styled.img``;
-
-export const MovieInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-left: 12px;
-`;
-
-// ============
-
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   color: #fff;
+  overflow: scroll;
 
   h2 {
     font-weight: 700;
@@ -79,8 +66,15 @@ export const Score = styled.div`
   }
 `;
 
-export const ReleaseDate = styled.span`
-  display: inline;
+export const SecondaryInfo = styled.div`
+  border-left: 1px solid #fff4;
+  padding-left: 4px;
+`;
+
+export const SecondaryInfoTitle = styled.span`
+  font-weight: 400;
+  display: block;
+  margin-bottom: 4px;
 `;
 
 export const GenreContainer = styled.span`
@@ -96,4 +90,9 @@ export const Genre = styled.span`
   padding: 5px 10px;
   margin-right: 8px;
   margin-top: 8px;
+`;
+
+export const BottomInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

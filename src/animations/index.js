@@ -15,7 +15,7 @@ export const animationTwo = {
   },
   out: {
     opacity: 0,
-    y: "-100vh",
+    y: "-20vh",
     scale: 0.3,
   },
 };
