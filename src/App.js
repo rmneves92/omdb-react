@@ -1,7 +1,6 @@
 import Home from "./pages/Home";
 import Details from "./pages/Details";
-import Catalog from "./pages/Catalog";
-import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import GlobalStyle from "../src/styles/global";
@@ -33,21 +32,19 @@ const Hero = styled.div`
     #3a6186
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-
-  /* border: 2px solid purple; */
   padding-top: 0rem;
   padding-bottom: 0rem;
-
   position: relative;
   width: 100%;
   height: 100%;
-
   margin-right: auto;
   margin-left: auto;
-
   max-width: 60rem;
+  padding: 100px;
 
-  padding: 8rem;
+  @media (max-width: 1024px) {
+    padding: 54px;
+  }
 `;
 
 const BackgroundImage = styled.div``;
@@ -59,13 +56,11 @@ function App() {
       <GlobalStyle />
       <BackgroundImage>
         <AnimatePresence exitBeforeEnter>
-          <Header />
-
           <Content>
+            <Sidebar />
             <Hero>
               <Switch location={location} key={location.pathname}>
                 <Route path="/" exact component={Home} />
-                <Route path="/catalog" exact component={Catalog} />
                 <Route path="/details" exact component={Details} />
                 <Route render={() => <Redirect to="/" />} />
               </Switch>

@@ -6,7 +6,8 @@ export const Container = styled.div`
   flex-wrap: wrap;
   color: #fff;
   overflow: scroll;
-
+  cursor: default;
+  max-height: calc(100vh - 120px);
   h2 {
     font-weight: 700;
   }
@@ -30,7 +31,7 @@ export const MovieDetails = styled.div`
     margin-bottom: 20px;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 1024px) {
     width: 50%;
   }
 `;

@@ -10,6 +10,7 @@ import {
   transition,
 } from "../../animations";
 import * as S from "./styles";
+import { Star } from "react-feather";
 
 const Details = (props) => {
   const moviesSlice = useSelector((state) => state.movies);
@@ -24,7 +25,7 @@ const Details = (props) => {
   const loadDetails = (id) => {
     try {
       api
-        .get(`/?i=${id}&plot=full`)
+        .get(`/?i=${id}&plot=full&type=movie`)
         .then((res) => {
           console.log("________details: ", res.data);
           setMovie(res.data);
@@ -43,7 +44,7 @@ const Details = (props) => {
       initial="out"
       animate="in"
       exit="out"
-      variants={animationTwo}
+      variants={animationOne}
       transition={transition}
     >
       <S.Container>
@@ -57,7 +58,7 @@ const Details = (props) => {
           <S.MovieTitle data-testid="movie-title">{movie.Title}</S.MovieTitle>
 
           <S.Score>
-            {/* <Star color="gold" /> */}
+            <Star color="gold" />
             <span>
               {movie.imdbRating}/10 ({movie.imdbVotes?.replace(/,/g, ".")}{" "}
               votes)
@@ -74,18 +75,21 @@ const Details = (props) => {
           <S.MovieOverview>{movie.Plot}</S.MovieOverview>
 
           <S.BottomInfo>
-            <S.SecondaryInfo>
-              <S.SecondaryInfoTitle>Data</S.SecondaryInfoTitle>
-              {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}
-            </S.SecondaryInfo>
+            {movie.Released !== "N/A" && (
+              <S.SecondaryInfo>
+                <S.SecondaryInfoTitle>Data de lançamento</S.SecondaryInfoTitle>
+
+                {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}
+              </S.SecondaryInfo>
+            )}
 
             <S.SecondaryInfo>
-              <S.SecondaryInfoTitle>Diretor</S.SecondaryInfoTitle>
+              <S.SecondaryInfoTitle>Direção</S.SecondaryInfoTitle>
               {movie.Director}
             </S.SecondaryInfo>
 
             <S.SecondaryInfo>
-              <S.SecondaryInfoTitle>Diretor</S.SecondaryInfoTitle>
+              <S.SecondaryInfoTitle>Duração</S.SecondaryInfoTitle>
               {movie.Runtime}
             </S.SecondaryInfo>
           </S.BottomInfo>
