@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
-import {
-  setMovieId,
-  fetch,
-  fetchFailure,
-  fetchSuccess,
-} from "../../redux/moviesSlice";
+import { setMovieId, setCatalog } from "../../redux/moviesSlice";
 import * as S from "./styles";
+import { motion } from "framer-motion";
+import {
+  animationOne,
+  animationTwo,
+  animationThree,
+  transition,
+} from "../../animations";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -24,7 +26,11 @@ const Home = (props) => {
         .get(`/?s=${query}`)
         .then((res) => {
           console.log("________movies: ", res.data);
-          setMovie(res.data);
+          // setMovie(res.data);
+
+          dispatch(setCatalog(res.data.Search));
+
+          history.push("/catalog");
         })
         .catch((err) => {
           console.error(err);
@@ -42,37 +48,24 @@ const Home = (props) => {
     loadMovies(value);
   };
 
-  const openDetails = (id) => {
-    dispatch(setMovieId(id));
-    history.push("/details");
-  };
-
   return (
-    <S.Container>
-      <S.Hero>
-        <h1>Home</h1>
-
+    <motion.section
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={animationOne}
+      transition={transition}
+    >
+      <S.InputWrapper>
         <S.Input
           type="search"
           placeholder="Buscar filme..."
           onChange={(e) => handleChange(e.target.value)}
         />
+      </S.InputWrapper>
 
-        <button onClick={() => searchMovie()}>Buscar</button>
-        <button onClick={() => console.log(moviesSlice)}>Get details</button>
-
-        <div>
-          {movie &&
-            movie.Search.map((m) => (
-              <div onClick={() => openDetails(m.imdbID)}>
-                <img src={m.Poster}></img>
-                <h3>{m.Title}</h3>
-                <span>{m.Year}</span>
-              </div>
-            ))}
-        </div>
-      </S.Hero>
-    </S.Container>
+      <S.Button onClick={() => searchMovie()}>Buscar</S.Button>
+    </motion.section>
   );
 };
 

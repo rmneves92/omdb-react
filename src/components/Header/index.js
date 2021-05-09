@@ -1,15 +1,17 @@
 import React from "react";
 import * as S from "./styles";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   return (
     <S.HeaderContainer>
       <S.Nav>
         <span>teste</span>
+
         <div>
-          <a>link1</a>
-          <a>link2</a>
-          <a>link3</a>
+          <Link to="/">Home </Link>
+          <Link to="/catalog">Catalogo </Link>
+          <Link to="/details">Detalhes </Link>
         </div>
       </S.Nav>
     </S.HeaderContainer>

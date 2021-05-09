@@ -2,6 +2,14 @@ import moment from "moment";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../../services/api";
+import { motion } from "framer-motion";
+import {
+  animationOne,
+  animationTwo,
+  animationThree,
+  transition,
+} from "../../animations";
+import * as S from "./styles";
 
 const Details = (props) => {
   const moviesSlice = useSelector((state) => state.movies);
@@ -16,7 +24,7 @@ const Details = (props) => {
   const loadDetails = (id) => {
     try {
       api
-        .get(`/?i=${id}`)
+        .get(`/?i=${id}&plot=full`)
         .then((res) => {
           console.log("________details: ", res.data);
           setMovie(res.data);
@@ -31,19 +39,65 @@ const Details = (props) => {
 
   console.log({ movie });
   return (
-    <>
-      <h1> {movie.Title} </h1>
+    <motion.section
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={animationOne}
+      transition={transition}
+    >
+      {/* <S.DetailsContainer>
+        <S.MoviePoster src={movie.Poster} alt={movie.Title}></S.MoviePoster>
+        <S.MovieInfo>
+          <h2> {movie.Title} </h2>
+          <span>Genero: {movie.Genre}</span>
 
-      <p>Ano: {movie.Year}</p>
-      <p>
-        Nota: {movie.imdbRating}/10 ( {movie.imdbVotes?.replace(/,/g, ".")}{" "}
-        votos)
-      </p>
-      <p>Data: {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}</p>
-      <p>Genero: {movie.Genre}</p>
+          <p>Ano: {movie.Year}</p>
+          <span>
+            Data: {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}
+          </span>
+          <span>
+            Nota: {movie.imdbRating}/10 ( {movie.imdbVotes?.replace(/,/g, ".")}{" "}
+            votos)
+          </span>
 
-      <img src={movie.Poster} alt={movie.Title}></img>
-    </>
+          <p>{movie.Plot}</p>
+        </S.MovieInfo>
+      </S.DetailsContainer> */}
+
+      <S.Container>
+        <S.PosterContainer>
+          {movie.Poster && (
+            <S.Poster src={movie.Poster} alt={movie.Title}></S.Poster>
+          )}
+        </S.PosterContainer>
+
+        <S.MovieDetails>
+          <S.MovieTitle data-testid="movie-title">{movie.Title}</S.MovieTitle>
+
+          <S.Score>
+            {/* <Star color="gold" /> */}
+            <span>
+              {movie.imdbRating}/10 ({movie.imdbVotes?.replace(/,/g, ".")}{" "}
+              votes)
+            </span>
+          </S.Score>
+
+          <S.GenreContainer>
+            {movie.Genre &&
+              movie.Genre.split(",").map((genre, index) => (
+                <S.Genre key={index}>{genre}</S.Genre>
+              ))}
+          </S.GenreContainer>
+
+          <S.MovieOverview>{movie.Plot}</S.MovieOverview>
+
+          <S.ReleaseDate>
+            {moment(movie.Released, "DD MMM YYYY").format("DD/MM/YYYY")}
+          </S.ReleaseDate>
+        </S.MovieDetails>
+      </S.Container>
+    </motion.section>
   );
 };
 
