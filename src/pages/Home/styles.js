@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
   overflow: scroll;
   max-height: calc(100vh - 100px);
 `;
@@ -20,7 +20,7 @@ export const Hero = styled.div`
 export const InputWrapper = styled.div`
   position: relative;
   margin-bottom: 45px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   display: flex;
 `;
 

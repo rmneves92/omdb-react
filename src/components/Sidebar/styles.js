@@ -11,7 +11,7 @@ export const SidebarContainer = styled.aside`
   padding: 120px 20px;
   z-index: 2;
 
-  @media (max-width: 1550px) {
+  @media (max-width: 1024px) {
     width: 100%;
     align-items: flex-start;
     justify-content: center;
@@ -22,9 +22,8 @@ export const SidebarContainer = styled.aside`
 
 export const Nav = styled.nav`
   width: 100%;
-  padding: 0 24px;
 
-  @media (max-width: 1550px) {
+  @media (max-width: 1024px) {
     border-bottom: 1px solid #fff;
   }
 `;
@@ -35,7 +34,7 @@ export const List = styled(motion.ul)`
   justify-content: space-evenly;
   color: #fff;
 
-  @media (max-width: 1550px) {
+  @media (max-width: 1024px) {
     flex-direction: row;
   }
 `;
@@ -47,9 +46,9 @@ export const ListItem = styled(motion.li)`
 export const NavLink = styled(Link)`
   color: #fff;
   text-decoration: none;
-  font-size: 42px;
+  font-size: 32px;
 
-  @media (max-width: 1550px) {
+  @media (max-width: 1024px) {
     font-size: 18px;
   }
 `;

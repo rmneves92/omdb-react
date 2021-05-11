@@ -71,7 +71,7 @@ const Home = (props) => {
   };
 
   return (
-    <motion.section
+    <motion.article
       initial="out"
       animate="in"
       exit="out"
@@ -96,7 +96,7 @@ const Home = (props) => {
           </Button>
         </S.InputWrapper>
 
-        <motion.section
+        <motion.div
           initial="out"
           animate="in"
           exit="out"
@@ -106,7 +106,7 @@ const Home = (props) => {
           {moviesSlice.catalog.length >= 10 && (
             <Pagination changePage={setPage} page={page} />
           )}
-          <motion.section
+          <motion.div
             initial="out"
             animate="in"
             exit="out"
@@ -118,10 +118,10 @@ const Home = (props) => {
                 <MovieCard key={i} {...m} open={handleClick2} />
               ))}
             </S.Grid>
-          </motion.section>
-        </motion.section>
+          </motion.div>
+        </motion.div>
       </S.Container>
-    </motion.section>
+    </motion.article>
   );
 };
 

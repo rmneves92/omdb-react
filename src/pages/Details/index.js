@@ -38,7 +38,7 @@ const Details = (props) => {
   };
 
   return (
-    <motion.section
+    <motion.article
       initial="out"
       animate="in"
       exit="out"
@@ -93,7 +93,7 @@ const Details = (props) => {
           </S.BottomInfo>
         </S.MovieDetails>
       </S.Container>
-    </motion.section>
+    </motion.article>
   );
 };
 
