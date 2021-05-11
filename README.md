@@ -1,4 +1,4 @@
-# Junto Seguros - Fronted Challenge - TMDB
+# Junto Seguros - Fronted Challenge - OMDB
 
 Application developed with ReactJS integrated with the OMDB API.
 
