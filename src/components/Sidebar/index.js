@@ -35,9 +35,6 @@ const Sidebar = (props) => {
             <S.NavLink to="/">Home</S.NavLink>
           </S.ListItem>
 
-          {/* <S.ListItem variants={item}>
-            <S.NavLink to="/catalog">Catálogo</S.NavLink>
-          </S.ListItem> */}
           <S.ListItem variants={item}>
             <S.NavLink to="/details">Última visita</S.NavLink>
           </S.ListItem>
